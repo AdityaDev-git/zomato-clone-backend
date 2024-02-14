@@ -1,9 +1,9 @@
 const Restaurants = require("../Models/Restaurants.model.js");
 
-exports.getCityList = async (req,res)=>{
+exports.getRestaurantsList = async (req,res)=>{
   try{
-    const location = await Restaurants.find();("city");
-    res.json(location);
+    const restaurantslist = await Restaurants.find();
+    res.json(restaurantslist);
   } catch(err){
     res.status(500).json({error:err});
   }
