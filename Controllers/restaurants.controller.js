@@ -5,12 +5,12 @@ exports.filterRestaurants = (req,res)=>{
 
     let {mealtype, cuision, location, lcost, hcost, page, sort}= req.body;
 
-    page = page ? page : 1;
+    // page = page ? page : 1;
     sort = sort ? sort : 1; 
     let Payload = {};
-    const itemsPerPage = 3;
-    let startIndex = itemsPerPage * page - itemsPerPage;
-    let endIndex = itemsPerPage * page; 
+    const itemsPerPage = 2;
+    // let startIndex = itemsPerPage * page - itemsPerPage;
+    // let endIndex = itemsPerPage * page; 
 
     if(mealtype){
         Payload['type.mealtype'] = mealtype;
@@ -55,11 +55,9 @@ exports.filterRestaurants = (req,res)=>{
     //find
     Resturants.find(Payload).sort({cost:sort})
     .then(response =>{
-        const filterResponse = response.slice(startIndex,endIndex);
-        res.status(200).json({
-            msg : "Restaurants Loaded",
-            restaurants : filterResponse
-        })
+        const filterResponse = response;
+        //respnse.slice(startindex,endindex)
+        res.json( filterResponse);
     }) .catch(err =>{
         res.status(400).json({
             error:err
